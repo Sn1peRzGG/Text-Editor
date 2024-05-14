@@ -51,6 +51,9 @@ def redo(event=None):
 		pass
 	count_words()
 
+def quit(event=None):
+	save_file()
+	root.destroy()
 
 def cut(event=None):
 	notepad.event_generate("<<Cut>>")
@@ -99,6 +102,9 @@ root.bind("<Control-a>", select_all)
 root.bind("<Control-s>", save_file)
 root.bind("<Control-z>", undo)
 root.bind("<Control-y>", redo)
+root.bind("<Control-q>", quit)
 root.bind("<KeyRelease>", count_words)
+
+root.protocol("WM_DELETE_WINDOW", quit)
 
 root.mainloop()
