@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import filedialog
 
 root = tk.Tk()
-root.title("Text Editor")
+root.title("Untitled - Text Editor")
 root.geometry("620x420")
 
 saved_path = None
@@ -28,13 +28,15 @@ def save_file(event=None):
 	if saved_path:
 		with open(saved_path, "w") as file:
 			file.write(text_widget.get("1.0", "end"))
+		root.title(f"{saved_path} - Text Editor")
 	else:
 		file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt"), ("All files", "*.*")], initialfile="Doc1.txt")
 		if file_path:
 			with open(file_path, "w") as file:
 				file.write(text_widget.get("1.0", "end"))
-			saved_path = file_path
 			root.title(f"{file_path} - Text Editor")
+			saved_path = file_path
+
 
 def cut(event=None):
 	text_widget.event_generate("<<Cut>>")
